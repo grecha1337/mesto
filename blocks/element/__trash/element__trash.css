@@ -4,5 +4,6 @@
   position: absolute;
   top: 18px;
   right: 15px;
-  cursor: pointer;
+  border: none;
+  background-image: url(../../../images/trash.svg);
 }
