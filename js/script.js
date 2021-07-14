@@ -61,18 +61,21 @@ function closePopup(element) {
 function createCard(cardData) {
   const cardTemplate = document.querySelector("#element").content;
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
-  cardElement.querySelector('.element__title').textContent = cardData.name;
-  cardElement.querySelector('.element__image').src = cardData.link;
-  cardElement.querySelector('.element__image').alt = cardData.name;
-  cardElement.querySelector('.element__image').addEventListener('click',function(event){
-    setImagePopup(cardData.link);
-    setNamePopup(cardData.name);
+  const cardTitle =  cardElement.querySelector('.element__title');
+  const cardImage = cardElement.querySelector('.element__image');
+  const cardTrash = cardElement.querySelector('.element__trash');
+  const elementLike = cardElement.querySelector('.element__btn-like');
+  cardTitle.textContent = cardData.name;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+  cardImage.addEventListener('click',function(event){
+    popupImageLink.src = cardData.link;
+    popupImageName.textContent = cardData.name;
     openPopup(popupImage);
   })
-  cardElement.querySelector('.element__trash').addEventListener('click',function(event){
+  cardTrash.addEventListener('click',function(event){
     deleteCart(cardElement);
   })
-  const elementLike = cardElement.querySelector('.element__btn-like');
   elementLike.addEventListener('click',function(event){
     like(elementLike);
   })
@@ -116,14 +119,6 @@ function formPlaceSubmitHandler (evt) {
   }
 }
 
-function setImagePopup(imageLink) {
-  popupImageLink.src = imageLink;
-}
-
-function setNamePopup(text) {
-  popupImageName.textContent = text;
-}
-
 profileEditBtn.addEventListener('click', function(event){
   openPopup(popup);
 });
@@ -143,7 +138,6 @@ popupPlaceClose.addEventListener('click', function(event){
 popupImageClose.addEventListener('click', function(event){
   closePopup(popupImage);
 });
-
 
 formElement.addEventListener('submit', formProfileSubmitHandler); 
 formPlaceElement.addEventListener('submit', formPlaceSubmitHandler); 
